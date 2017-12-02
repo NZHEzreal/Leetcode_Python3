@@ -1,0 +1,19 @@
+题意：
+给定一个数组，里面第i个元素就代表第i天的股票价格，让你计算最大利润是多少。条件是要先卖出才能买入。
+
+思路：
+我觉得应该是贪心算法。遍历这个list，如果后一天的股票价格大于今天的股票价格那么就抛售，然后买进第二天的股票。
+设定一个变脸max_prifit来代表最大利润，每次交易都累积利润。
+
+代码：
+class Solution:
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        max_profit = 0
+        for i in range(len(prices) - 1):
+            if prices[i] < prices[i+1]:
+                max_profit += (prices[i+1] - prices[i])
+        return max_profit
