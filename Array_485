@@ -1,0 +1,31 @@
+题意是找到一个list中最大连续1的个数。
+
+def solution(nums):
+    max_count = 0   # 最大连续1的个数
+    current_count = 0   #当前最大连续1的个数
+    for i in range(len(nums)):
+        if nums[i] == 1:
+            current_count += 1
+            max_count = max(current_count, max_count)
+        else:
+            current_count = 0
+
+    return max_count
+    
+   思路：
+   遍历nums，如果是1，就开始计数current_count，然后比较目前为止最大的连续1的个数，遇到0就清空current_count。
+   
+   
+   改进：
+   看了一下其他人的解决方法，我发现在比较current_count 和 max_count的地方，我计算了多次，这样有损效率。下面是改良版。
+   def solution2(nums):
+       max_count = 0
+       current_count = 0
+       for num in nums:
+           if num == 1:
+               current_count += 1
+           else:
+               if current_count > max_count:
+                   max_count = current_count
+               current_count = 0
+       return max(max_count, current_count)
