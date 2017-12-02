@@ -1,0 +1,30 @@
+class Solution:
+    def matrixReshape(self, nums, r, c):
+        """
+        :type nums: List[List[int]]
+        :type r: int
+        :type c: int
+        :rtype: List[List[int]]
+        """
+        l = []
+        for i in nums:
+            for j in i:
+                l.append(j)
+
+        if r*c != len(l):
+            return nums
+        else:
+            k = []
+            for i in range(len(l)//c):
+                k.append(l[i*c:(i+1)*c])
+            return k
+           
+思路：
+先把二维矩阵转换成一维数组。然后根据输入创建一个空的二维矩阵（先把模型搭好），然后把一维数组中的内容依次填入空的二维矩阵。
+ 
+反思：
+在给空二维数组赋值时脑子短路了，一直想不明白k.append(l[ic:(i+1)c]).
+在一句代码看不懂的时候，先把它细化拆分。
+比如这句代码，我们知道append是给list拼接元素。
+再看内部，使用切片截取list中的元素。c是二维数组的宽度（一行有多少个元素）。
+那么它们每行都是c个元素，当i=0，c=4时，[[4个元素]]，等等。想不明白就把值代入去算一下，很快就会明白了。
