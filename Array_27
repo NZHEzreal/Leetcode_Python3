@@ -1,0 +1,30 @@
+题意：
+题目不难，难就难在没读懂题的意思，我一开始以为不就返回删除值为val的元素之后的数组么？
+其实题意是，给定一个数组nums和一个值val，删除所有值为val的元素，并返回新的长度。
+不能分配给额外的数组内存，你必须通过修改nums而不是产生其他内存。
+数组中元素的顺序可以改变，你处理之后超出需要的长度无所谓。
+意思就是说[3,2,2,3],val=3，去除值为3的元素，并返回长度2。
+只要前两个是[2,2]开头的nums就行，其他元素是什么都行
+
+说了这么多也不知道表达清楚了没有-.-
+
+思路：
+既然只能操作nums这个数组，我们可以通过移动元素来实现。
+遍历nums，只要当前元素的值不是val，我们就从头开始覆盖，这就保证前N个元素的正确
+
+
+代码：
+class Solution:
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        index = 0
+        length = len(nums)
+        for i in range(length):
+            if nums[i] != val:
+                nums[index] = nums[i]
+                index += 1
+        return index
