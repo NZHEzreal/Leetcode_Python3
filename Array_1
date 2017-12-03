@@ -1,0 +1,25 @@
+题意：
+从给定的一个数组中选取两个元素，让这两个元素的和等于目标值target，并返回这两个元素的索引[i,j]
+
+思路：
+这是Leetcode第一题，我以为很简单，乍一看也不难。
+我用冒泡排序的思想使用了两次for循环，submit之后runtime out，很明显这种思想行不通。
+然后上网站找到一种比较聪明的办法，具体如下：
+假定m和n是答案，且m排列在n的前面。然后开始从头遍历数组，如果target-当前正在遍历的值(num[i])在dict中，那么就返回他们的索引。
+否则，就把当前元素num[i]加入到dict中。
+因为dict中只要有target-num[i]这个值，就证明m和n的索引都确定了
+
+代码：
+class Solution:
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        dict = {}
+        for i in range(len(nums)):
+            if target - nums[i] in dict:
+                return (dict[target-nums[i]], i)
+            else:
+                dict[nums[i]] = i
