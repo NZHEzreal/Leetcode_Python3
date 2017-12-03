@@ -1,0 +1,23 @@
+题意：
+给定一个经过排序的数组和一个目标值val，如果val在数组中就返回等于这个val元素的索引，如果val不在数组中，就按照顺序插入并返回插入位置的索引。
+
+
+思路：
+这题很简单，但是我又愚蠢了，把边界条件考虑了一遍，花了20分钟还有错误，mdzz
+看了discuss里的大神写的，就一句话。
+这不是抄袭！学习大神考虑问题的思想！
+我的思维瓶颈是一直在考虑val在不在数组中，而大神的code告诉我，不用考虑val是否在数组中
+使用列表生成式，每生成一个就判断生成的这个数是否小于val，小于的话就继续生成，直到生成的这个数大于val为止，
+这时使用len()函数计算生成列表的长度，也就是val插入的索引了
+不得不说，真的很聪明
+
+
+代码：
+class Solution:
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        return len([num for num in nums if num < target])
