@@ -1,0 +1,32 @@
+题意：
+给定一个数组，去除重复的元素，保证每个元素只出现一次并返回新的长度。
+不能新建额外的数组，你必须通过修改数组来来保证空间复杂度为O(1)
+
+
+思路：
+使用一个index变量来记录索引，index初始值设为1(从第二个元素开始)
+使用length记录新数组的长度，默认长度是给定数组长度
+从数组的第二个元素开始遍历，遇到新的值就更新索引和临时变量（临时变量记录当前被遍历的元素），否则length-1
+中心思想就是，遍历时遇到新的值就存起来，然后继续遍历，遇到不一样的就换。
+
+
+代码：
+class Solution:
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) == 0:
+            return 0
+        length = len(nums)
+        index = 1
+        temp = nums[0]
+        for i in nums[1:]:
+            if i != temp:
+                nums[index] = i
+                index += 1
+                temp = i
+            else:
+                length -= 1
+        return length
